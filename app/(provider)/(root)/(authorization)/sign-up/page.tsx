@@ -1,14 +1,16 @@
 "use client";
 import React, { useRef } from "react";
 import Page from "../../_components/Page";
-import { authAPIs } from "@/api/authorization";
 import { useRouter } from "next/navigation";
+import { signUpAPIs } from "@/api/authorization/signUp";
+import { useAuthStore } from "@/zustand/store";
 
 function SignUpPage() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const logIn = useAuthStore((state) => state.logIn);
 
   const handleClickSignUpButton = async () => {
     const email = emailRef.current!.value;
@@ -26,9 +28,10 @@ function SignUpPage() {
     if (passwordConfirm !== password)
       return alert("비밀번호와 비밀번호 확인이 다릅니다.");
 
-    await authAPIs.postAuthorization(email, password);
+    await signUpAPIs.postSignUp(email, password);
 
     alert("회원가입 성공");
+    logIn();
     router.push("/");
   };
 

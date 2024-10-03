@@ -1,9 +1,15 @@
 "use client";
+import { useAuthStore, useLogInModalStore } from "@/zustand/store";
 import React from "react";
 
 function CartButton() {
+  const setIsClickedLogInModal = useLogInModalStore(
+    (state) => state.setIsClickedLogInModal
+  );
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+
   const handleClickCartButton = () => {
-    return <h1>hello</h1>;
+    !isLoggedIn ? setIsClickedLogInModal() : alert("장바구니에 넣었습니다."); //zustand로 로그인 상태 관리 해서 로그인 안했으면 상품 담지말고 로그인 창으로
   };
 
   return (

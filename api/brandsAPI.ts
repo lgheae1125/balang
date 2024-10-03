@@ -1,14 +1,8 @@
-import axios from "axios";
-import { baseURL } from "./baseURL/baseURL";
-
-const brandsAPI = axios.create({
-  baseURL,
-  timeout: 10000,
-});
+import { baseAPI } from "./baseAPI/baseAPI";
 
 const getBrands = async () => {
   try {
-    const response = await brandsAPI.get("/brands");
+    const response = await baseAPI.get("/brands");
     const brands = await response.data.result;
     return brands;
   } catch (err) {

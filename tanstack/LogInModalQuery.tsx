@@ -1,12 +1,13 @@
+"use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 
-const LogInModalQuery = new QueryClient();
+const AuthQuery = new QueryClient();
 
-function LogInModalQueryProvider({ children }: PropsWithChildren) {
+function AuthProvider({ children }: PropsWithChildren) {
   return (
-    <QueryClientProvider client={LogInModalQuery}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={AuthQuery}>{children}</QueryClientProvider>
   );
 }
+
+export default AuthProvider;

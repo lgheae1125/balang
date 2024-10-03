@@ -1,10 +1,26 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { useAuthStore, useLogInModalStore } from "@/zustand/store";
 
 function Header() {
+  const setIsClickedLogInModal = useLogInModalStore(
+    (state) => state.setIsClickedLogInModal
+  );
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const logOut = useAuthStore((state) => state.logOut);
+
+  const handleClickLogInButton = () => {
+    setIsClickedLogInModal();
+  };
+  const handleClickLogOutButton = () => {
+    logOut();
+    console.log(isLoggedIn);
+  };
+
   return (
     <header className="border-b px-6 py-4 flex justify-between items-center">
-      <ul className="flex gap-x-20">
+      <ul className="flex gap-x-20 items-center">
         <li>
           <Link href="/" className="text-2xl font-bold">
             발랑
@@ -16,21 +32,37 @@ function Header() {
           </Link>
         </li>
       </ul>
-      <ul className="flex gap-x-4">
-        <li>
-          <Link
-            href="/sign-up"
-            className="text-[15px] font-medium text-gray-800 hover:text-black transition"
-          >
-            회원가입
-          </Link>
-        </li>
-        <li>
-          <button className="text-[15px] font-medium text-gray-800 hover:text-black transition">
-            로그인
-          </button>
-        </li>
-      </ul>
+      {!isLoggedIn ? (
+        <ul className="flex gap-x-4">
+          <li>
+            <Link
+              href="/sign-up"
+              className="text-[15px] font-medium text-gray-800 hover:text-black transition"
+            >
+              회원가입
+            </Link>
+          </li>
+          <li>
+            <button
+              onClick={handleClickLogInButton}
+              className="text-[15px] font-medium text-gray-800 hover:text-black transition"
+            >
+              로그인
+            </button>
+          </li>
+        </ul>
+      ) : (
+        <ul className="flex gap-x-4">
+          <li>
+            <button
+              onClick={handleClickLogOutButton}
+              className="text-[15px] font-medium text-gray-800 hover:text-black transition"
+            >
+              로그아웃
+            </button>
+          </li>
+        </ul>
+      )}
     </header>
   );
 }
