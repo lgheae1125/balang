@@ -4,11 +4,11 @@ import { brandsAPIs } from "@/api/brandsAPI";
 import Link from "next/link";
 import { productsAPIs } from "@/api/products";
 import BrandId from "./components/BrandId";
-import { productsType } from "@/schemas/products";
+import { productType } from "@/schemas/product";
 
 async function BrandsPage() {
   const brands: BrandsType[] = await brandsAPIs.getBrands();
-  const products: productsType[] = await productsAPIs.getProducts();
+  const products: productType[] = await productsAPIs.getProducts();
   return (
     <Page>
       <section className="pb-16">

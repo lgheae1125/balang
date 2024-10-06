@@ -1,5 +1,5 @@
+import { productType } from "@/schemas/product";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 type useLogInModalType = {
   isClickedLogInModal: boolean;
@@ -24,4 +24,17 @@ export const useAuthStore = create<useAuthStoreType>((set) => ({
   isLoggedIn: false,
   logIn: () => set(() => ({ isLoggedIn: true })),
   logOut: () => set(() => ({ isLoggedIn: false })),
+}));
+
+type CartproductsStoreType = {
+  containedCartProducts: productType[];
+  addProductsInCart: (newCartProduct: productType) => void;
+};
+
+export const useCartproductsStore = create<CartproductsStoreType>((set) => ({
+  containedCartProducts: [],
+  addProductsInCart: (newCartProduct: productType) =>
+    set((state) => ({
+      containedCartProducts: [...state.containedCartProducts, newCartProduct],
+    })),
 }));

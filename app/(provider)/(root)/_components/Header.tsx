@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
 import { useAuthStore, useLogInModalStore } from "@/zustand/store";
 
 function Header() {
@@ -15,7 +14,6 @@ function Header() {
   };
   const handleClickLogOutButton = () => {
     logOut();
-    console.log(isLoggedIn);
   };
 
   return (
@@ -53,6 +51,14 @@ function Header() {
         </ul>
       ) : (
         <ul className="flex gap-x-4">
+          <li>
+            <Link
+              href="/cart"
+              className="text-[15px] font-medium text-gray-800 hover:text-black transition"
+            >
+              장바구니
+            </Link>
+          </li>
           <li>
             <button
               onClick={handleClickLogOutButton}

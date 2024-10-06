@@ -1,11 +1,11 @@
 "use client";
-import { productsType } from "@/schemas/products";
+import { productType } from "@/schemas/product";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 //왜 굳이 BrandIdProps로 한번 더 감싸줘야 타입 지정이 되는지 잘 모르겠슴
 interface BrandIdProps {
-  products: productsType[];
+  products: productType[];
 }
 
 function BrandId({ products }: BrandIdProps) {

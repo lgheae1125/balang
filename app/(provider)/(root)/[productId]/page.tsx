@@ -8,7 +8,8 @@ async function DetailProductPage({
 }: {
   params: { productId: string };
 }) {
-  const product = await productAPIs.getProduct(params.productId);
+  const productId = params.productId;
+  const product = await productAPIs.getProduct(productId);
 
   return (
     <Page>
@@ -35,7 +36,7 @@ async function DetailProductPage({
                 <div className="text-slate-900 font-bold">잔여 재고</div>
                 <div className="col-span-4">{product.onlineStock}</div>
               </div>
-              <CartButton />
+              <CartButton product={product} />
             </div>
           </>
         )}
